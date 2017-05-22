@@ -15,46 +15,56 @@ Inspired by my A.R.S *(Auto Response System)* inside of Echo 2.0 Bot.
 init cord!
 
 Bot.New ( "DiscordBotTokenHere" )!
-
 Bot.MessageCreate (
 	set prefix = "+"!
-	set user = "["146046383726657536", "001100"]"!
-	set channel = "["285116606349049856", "02200", "0111"]"!
-	set roles = "["Management", "Admin"]"!
+	set warship = "hello"!
+	set master = "the kings"!
+	set user = ["146046383726657536", "001100"]!
+	set channel = ["290690164945190913", "02200", "0111"]!
+	set roles = ["Management", "Admin"]!
 
-	inherit "funcs.q"!
-	
+	inherit "commands.q"!
+
+	Bot.Command ("var(prefix)test")
+		if (User.ID == ["146046383726657536"]) {
+			Channel.Send(m.ChannelID, master.ToUpper() => "Testing: " => warship.ToUpper())
+		}
+	end!
+
+)!
+```
+  
+**File:** *commands.q*
+```go
+init cord!
+
 	// Testing command for new features.
 	Bot.Command ("var(prefix)hi")
-		if (User.ID == var(user)) && (User.HasRole == var(roles)) {
+		if (User.ID == var(user)) && (Channel.ID == var(channel)) {
 			Channel.Send(m.ChannelID, "Testing stuff out! break; It worked?!?!?!")
+		} else {
+			Channel.Send(m.ChannelID, "Nope!")
 		}
 	end!
 
 	Bot.Command ("var(prefix)hello")
-		Channel.Send(m.ChannelID, "Love long in prosper.")
+		if (User.ID == var(user)) || (Channel.ID == var(channel)) {
+			Channel.Send(m.ChannelID, var(warship) => " " => master.ToUpper() => " The World!")
+		} else {
+			Channel.Send(m.ChannelID, "Nope!")
+		}
 	end!
 
 	Bot.Command ("var(prefix)update")
+	if (User.ID == ["146046383726657536"]) {
 		System.Reload()
-		Channel.Send(m.ChannelID, "<@m.UserID> You have restarted the cord script. All updates are live.")
+		Channel.Send(m.ChannelID, "<@m.UserID> You have restarted the cord script.")
+	} else {
+		Channel.Send(m.ChannelID, "You're not allowed to use this command.")
+	}
 	end!
 
 	Bot.Command ("var(prefix)pm")
-		User.Send(m.UserID, "<@m.UserID> You are awesome.")
-	end!
-)!
-```
-  
-**File:** *funcs.q*
-```go
-init cord!
-
-set cars = "world"!
-
-	Bot.Command ("var(prefix)wreck")
-		if (User.ID == var(user)) && (User.HasRole == var(roles)) {
-			Channel.Send(m.ChannelID, "You got this!")
-		}
+		User.Send(m.UserID, "<@m.UserID> You are the shit.")
 	end!
 ```
