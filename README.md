@@ -12,23 +12,30 @@ Inspired by my A.R.S *(Auto Response System)* inside of Echo 2.0 Bot.
 ## Example cord script
 **File:** *main.q*
 ```go
-init cord!
+Bot.New ( "DiscordBotToken" )
+Listen()
 
-Bot.New ( "DiscordBotTokenHere" )!
-Bot.MessageCreate (
-	set prefix = "+"
-	set warship = "hello"
-	set master = "the kings"
-	set user = ["146046383726657536", "001100"]
-	set channel = ["290690164945190913", "02200", "0111"]
-	set roles = ["Management", "Admin"]
+var prefix = "+"
+var warship = "to the kings of the world!"
 
-	Command (prefix + "hi")
-	if (User.ID == var(user)) {
-		Channel.Send(m.ChannelID, "Testing this shit out, perhaps one day we will win! " + master)
-	} else {
-		Channel.Send(m.ChannelID, "Maybe not!")
-	}
-	end!
-)!
+cord =>
+	Message.Contains(prefix + "hello"):test
+	User.ID("146046383726657536", "test2", "ect"):hi
+<>
+
+cord =>
+	Message.Contains("testing:"):complete
+<>
+
+set (hi) =>
+	{kick}{/user} you have been warned for saying `Hello`
+<>
+
+set (test) =>
+	Testing all the good stuff!
+<>
+
+set (complete) =>
+	We are the one, the true...the proud!
+<>
 ```
