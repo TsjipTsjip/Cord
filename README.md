@@ -19,23 +19,27 @@ var prefix = "+"
 var warship = "to the kings of the world!"
 
 cord =>
-	Message.Contains(prefix + "hello"):test
-	User.ID("146046383726657536", "test2", "ect"):hi
+    Message.HasPrefix(prefix + "hello"):hi
+    Message.HasSuffix(prefix):test
 <>
 
 cord =>
-	Message.Contains("testing:"):complete
+    Message.HasPrefix("testing:"):complete
 <>
 
 set (hi) =>
-	{kick}{/user} you have been warned for saying `Hello`
+    User.ID("146046383726657536", "test2", "ect")
+    User.HasRole("Developer", "After", "Crash")
+    Hello {/user}!
+    Response.nil?
+    This command is not for you!
 <>
 
 set (test) =>
-	Testing all the good stuff!
+    Testing all the good stuff!
 <>
 
 set (complete) =>
-	We are the one, the true...the proud!
+    We are the one, the true...the proud!
 <>
 ```
